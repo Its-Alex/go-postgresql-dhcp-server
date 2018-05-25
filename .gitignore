@@ -14,4 +14,5 @@
 # Output dep
 vendor/
 
+# Docker
 data-dhcp4/

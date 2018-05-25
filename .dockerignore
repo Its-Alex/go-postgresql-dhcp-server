@@ -1,0 +1,10 @@
+# Golang deps
+vendor/
+
+# Github deps
+README.md
+LICENSE
+
+# Docker
+docker-compose.yml
+data-dhcp4/
