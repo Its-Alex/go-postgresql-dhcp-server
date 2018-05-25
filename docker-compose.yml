@@ -6,8 +6,8 @@ services:
     ports:
       - 127.0.0.1:5432:5432
     environment:
-      - POSTGRES_PASSWORD=password
       - POSTGRES_USER=dhcp4
+      - POSTGRES_PASSWORD=dhcp4
       - POSTGRES_DB=dhcp4
     volumes:
-      - ./dhcp4/:/var/lib/postgresql/data
+      - ./data-dhcp4/:/var/lib/postgresql/data
