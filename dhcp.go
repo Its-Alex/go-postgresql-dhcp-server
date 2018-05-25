@@ -25,12 +25,12 @@ func (h *Handler) ServeDHCP(p dhcp.Packet, msgType dhcp.MessageType, options dhc
 
 	switch msgType {
 	case dhcp.Discover:
-		device := GetDeviceByMAC(mac)
-		if device.IP == "" {
+		reservation := GetReservationByMAC(mac)
+		if reservation.IP == "" {
 			logrus.Debugf("Unknown server : %s", mac)
 			return nil
 		}
-		return dhcp.ReplyPacket(p, dhcp.Offer, h.ip, net.ParseIP(device.IP), h.leaseDuration,
+		return dhcp.ReplyPacket(p, dhcp.Offer, h.ip, net.ParseIP(reservation.IP), h.leaseDuration,
 			h.options.SelectOrderOrAll(options[dhcp.OptionParameterRequestList]))
 	case dhcp.Request:
 		if server, ok := options[dhcp.OptionServerIdentifier]; ok && !net.IP(server).Equal(h.ip) {
@@ -40,12 +40,12 @@ func (h *Handler) ServeDHCP(p dhcp.Packet, msgType dhcp.MessageType, options dhc
 		if reqIP == nil {
 			reqIP = net.IP(p.CIAddr())
 		}
-		device := GetDeviceByMAC(mac)
-		if device.IP == "" {
+		reservation := GetReservationByMAC(mac)
+		if reservation.IP == "" {
 			logrus.Debugf("Unknown server : %s", mac)
 			return dhcp.ReplyPacket(p, dhcp.NAK, h.ip, nil, 0, nil)
 		}
-		return dhcp.ReplyPacket(p, dhcp.ACK, h.ip, net.ParseIP(device.IP), h.leaseDuration,
+		return dhcp.ReplyPacket(p, dhcp.ACK, h.ip, net.ParseIP(reservation.IP), h.leaseDuration,
 			h.options.SelectOrderOrAll(options[dhcp.OptionParameterRequestList]))
 	}
 	return nil

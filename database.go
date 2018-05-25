@@ -8,16 +8,16 @@ import (
 // Db variable used to store global database
 var Db *sqlx.DB
 
-// Device structure in database
-type Device struct {
-	MaskSubnet string
-	IP         string
-	MAC        string
+// Reservation structure in database
+type Reservation struct {
+	MaskSubnet string `json:"subnet_mask"`
+	IP         string `json:"ip"`
+	MAC        string `json:"mac"`
 }
 
-// GetDeviceByMAC get a device from his mac address
-func GetDeviceByMAC(mac string) Device {
-	var device Device
-	Db.Get(&device, "SELECT * FROM devices WHERE mac == ?", mac)
-	return device
+// GetReservationByMAC get a reservation from his mac address
+func GetReservationByMAC(mac string) Reservation {
+	var reservation Reservation
+	Db.Get(&reservation, "SELECT host(mask_subnet), text(mac), text(ip) FROM reservations WHERE mac == ?", mac)
+	return reservation
 }
