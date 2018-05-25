@@ -19,6 +19,12 @@ var (
 		Short: "DHCP4 reservation tool",
 		Long:  `Reservation tool for ipv4 plugged with postgres`,
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
+			// Set logrus format to json
+			logrus.SetFormatter(&logrus.JSONFormatter{})
+			if viper.IsSet("verbose") {
+				logrus.SetLevel(logrus.DebugLevel)
+			}
+
 			var err error
 			Db, err = sqlx.Connect("postgres", fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=%s",
 				viper.GetString("psql_user"),
@@ -57,12 +63,15 @@ func init() {
 	rootCmd.Flags().String("interface", "", "network interface used by server")
 	rootCmd.Flags().String("port", "", "port to start server")
 	rootCmd.Flags().String("server_ip", "", "ip of server")
+	rootCmd.Flags().StringP("verbose", "v", "", "set verbosity to debug")
 	viper.BindPFlag("interface", rootCmd.Flags().Lookup("interface"))
 	viper.BindPFlag("server_ip", rootCmd.Flags().Lookup("server_ip"))
 	viper.BindPFlag("port", rootCmd.Flags().Lookup("port"))
+	viper.BindPFlag("verbose", rootCmd.Flags().Lookup("verbose"))
 	viper.BindEnv("interface")
 	viper.BindEnv("server_ip")
 	viper.BindEnv("port")
+	viper.BindEnv("verbose")
 
 	viper.SetDefault("interface", "en0")
 	viper.SetDefault("port", "67")
