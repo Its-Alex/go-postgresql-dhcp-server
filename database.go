@@ -1,10 +1,11 @@
-package database
+package main
 
 import (
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq" // Used by sqlx as postgres driver
 )
 
+// Db variable used to store global database
 var Db *sqlx.DB
 
 // Device structure in database

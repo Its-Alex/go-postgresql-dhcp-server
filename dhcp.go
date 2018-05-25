@@ -1,11 +1,10 @@
-package dhcp
+package main
 
 import (
 	"fmt"
 	"net"
 	"time"
 
-	"github.com/Its-Alex/dhcp4-reservation/database"
 	dhcp "github.com/krolaw/dhcp4"
 	"github.com/krolaw/dhcp4/conn"
 	"github.com/sirupsen/logrus"
@@ -26,7 +25,7 @@ func (h *Handler) ServeDHCP(p dhcp.Packet, msgType dhcp.MessageType, options dhc
 
 	switch msgType {
 	case dhcp.Discover:
-		device := database.GetDeviceByMAC(mac)
+		device := GetDeviceByMAC(mac)
 		if device.IP == "" {
 			logrus.Debugf("Unknown server : %s", mac)
 			return nil
@@ -41,7 +40,7 @@ func (h *Handler) ServeDHCP(p dhcp.Packet, msgType dhcp.MessageType, options dhc
 		if reqIP == nil {
 			reqIP = net.IP(p.CIAddr())
 		}
-		device := database.GetDeviceByMAC(mac)
+		device := GetDeviceByMAC(mac)
 		if device.IP == "" {
 			logrus.Debugf("Unknown server : %s", mac)
 			return dhcp.ReplyPacket(p, dhcp.NAK, h.ip, nil, 0, nil)
@@ -52,8 +51,8 @@ func (h *Handler) ServeDHCP(p dhcp.Packet, msgType dhcp.MessageType, options dhc
 	return nil
 }
 
-// Start is used by cobra to launch programm
-func Start(cmd *cobra.Command, args []string) {
+// dhcpStart is used by cobra to launch programm
+func dhcpStart(cmd *cobra.Command, args []string) {
 	conn, err := conn.NewUDP4FilterListener(viper.GetString("interface"), fmt.Sprintf(":%s",
 		viper.GetString("port"),
 	))
