@@ -13,3 +13,5 @@
 
 # Output dep
 vendor/
+
+data-dhcp4/
