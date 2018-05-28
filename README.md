@@ -1,11 +1,13 @@
-# DHCP4 reservation
+[![Docker Automated build](https://img.shields.io/docker/automated/itsalex/go-postgresql-dhcp-server.svg)](https://hub.docker.com/r/itsalex/go-postgresql-dhcp-server/)
+
+# go-postgresql-dhcp-server
 
 This project aim to launch a dhcp4 server with only reservation capacibility.
 A postgres database contain reservation info, all database entry will
-be allocated and other will be ignored.
+be allocated with an ip and other will be ignored.
 
 
-## Quick start
+## Work in docker container
 
 ```
 $ docker-compose up -d
@@ -19,25 +21,17 @@ $ make enter
 ## Test in Vagrant environment
 
 ```
+$ make build
 $ vagrant up pxe_server
 $ vagrant ssh pxe_server
 $ sudo su
 # export DHCP4_INTERFACE=enp0s8
 # export DHCP4_PSQL_ADDR=10.0.2.2
 # /vagrant/bin/go-postgresql-dhcp-server
-root@pxe-server:/home/vagrant# /vagrant/bin/go-postgresql-dhcp-server
-{"level":"info","msg":"dhcp4 start on interface 67 and on port enp0s8","time":"2018-05-28T13:25:09Z"}
 ```
 
 In another terminal:
 
 ```
-$ vagrant up blank_server
-```
-
-To retry:
-
-```
-$ vagrant destroy blank_server -f
-$ vagrant up blank_server
+$ vagrant destroy blank_server -f && vagrant up blank_server
 ```
