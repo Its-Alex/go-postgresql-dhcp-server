@@ -1,3 +1,7 @@
+.PHONY: enter
+enter:
+	docker-compose exec goworkspace bash
+
 .PHONY: deps
 deps:
 	dep ensure -v --vendor-only
@@ -17,7 +21,7 @@ docker-build:
 .PHONY: db-schema
 db-schema:
 	echo "CREATE TABLE reservations(mask_subnet cidr NOT NULL, mac macaddr NOT NULL UNIQUE, ip inet NOT NULL UNIQUE);" | docker-compose exec -T --user postgres postgres psql dhcp4
-	
+
 .PHONY: db-fixtures
 db-fixtures:
 	echo "INSERT INTO reservations (mask_subnet, mac, ip) VALUES ('255.255.255.0'::cidr, '08:00:27:8e:15:8a'::macaddr, '192.168.0.11'::inet);" | docker-compose exec -T --user postgres postgres psql dhcp4
