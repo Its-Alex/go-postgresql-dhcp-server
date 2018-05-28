@@ -69,6 +69,6 @@ func Start() {
 			dhcp4.OptionBootFileName:     []byte("pxelinux.0"),
 		},
 	}
-	logrus.Info("dhcp4 start")
-	logrus.Fatal(dhcp4.Serve(conn, handler))
+	logrus.Infof("dhcp4 start on interface %s and on port %s", viper.GetString("port"), viper.GetString("interface"))
+	logrus.Fatal(dhcp4.Serve(conn, handler)))
 }
