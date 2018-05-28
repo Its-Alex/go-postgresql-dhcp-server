@@ -54,7 +54,7 @@ func (h *Handler) ServeDHCP(p dhcp4.Packet, msgType dhcp4.MessageType, options d
 
 // Start is used by cobra to launch programm
 func Start() {
-	conn, err := conn.NewUDP4FilterListener(viper.GetString("interface"), fmt.Sprintf("localhost:%s",
+	conn, err := conn.NewUDP4FilterListener(viper.GetString("interface"), fmt.Sprintf(":%s",
 		viper.GetString("port"),
 	))
 	if err != nil {
