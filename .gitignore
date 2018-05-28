@@ -17,3 +17,6 @@ vendor/
 
 # Docker
 data-dhcp4/
+
+# Vagrant
+.vagrant

@@ -70,5 +70,5 @@ func Start() {
 		},
 	}
 	logrus.Infof("dhcp4 start on interface %s and on port %s", viper.GetString("port"), viper.GetString("interface"))
-	logrus.Fatal(dhcp4.Serve(conn, handler)))
+	logrus.Fatal(dhcp4.Serve(conn, handler))
 }
