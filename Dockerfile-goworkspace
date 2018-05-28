@@ -1,0 +1,16 @@
+FROM golang:1.10
+
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y bash-completion
+
+# Makefile completion
+RUN apt-get install -y bash-completion && \
+    echo ". /etc/bash_completion" >> /root/.bashrc
+
+RUN mkdir -p /code/src/github.com/Its-Alex/dhcp4-reservation
+WORKDIR /code/src/github.com/Its-Alex/dhcp4-reservation
+ENV GOPATH=/code/
+ENV GOBIN=/usr/local/bin/
+
+RUN curl -s https://raw.githubusercontent.com/golang/dep/master/install.sh | GOBIN=/usr/local/bin sh
