@@ -34,3 +34,10 @@ In another terminal:
 ```
 $ vagrant up blank_server
 ```
+
+To retry:
+
+```
+$ vagrant destroy blank_server -f
+$ vagrant up blank_server
+```
