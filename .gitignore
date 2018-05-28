@@ -20,3 +20,5 @@ data-dhcp4/
 
 # Vagrant
 .vagrant
+
+bin/

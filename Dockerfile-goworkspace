@@ -11,6 +11,6 @@ RUN apt-get install -y bash-completion && \
 RUN mkdir -p /code/src/github.com/Its-Alex/dhcp4-reservation
 WORKDIR /code/src/github.com/Its-Alex/dhcp4-reservation
 ENV GOPATH=/code/
-ENV GOBIN=/usr/local/bin/
+ENV GOBIN=/code/src/github.com/Its-Alex/bin/
 
 RUN curl -s https://raw.githubusercontent.com/golang/dep/master/install.sh | GOBIN=/usr/local/bin sh
