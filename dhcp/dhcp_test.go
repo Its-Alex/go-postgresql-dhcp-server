@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Its-Alex/dhcp4-reservation/dhcp"
+	"github.com/Its-Alex/go-postgresql-dhcp-server/dhcp"
 	"github.com/krolaw/dhcp4"
 	"github.com/spf13/viper"
 )

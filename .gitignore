@@ -10,7 +10,7 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
-dhcp4-reservation
+go-postgresql-dhcp-server
 
 # Output dep
 vendor/

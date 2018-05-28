@@ -8,7 +8,7 @@ deps:
 
 .PHONY: build
 build:
-	go build -v -o bin/dhcp-server .
+	go build -v -o bin/go-postgresql-dhcp-server .
 
 .PHONY: test
 test:
@@ -16,7 +16,7 @@ test:
 
 .PHONY: docker-build
 docker-build:
-	docker build . -t itsalex/dhcp4-reservation
+	docker build . -t itsalex/go-postgresql-dhcp-server
 
 .PHONY: db-schema
 db-schema:

@@ -7,7 +7,7 @@ services:
     entrypoint: /bin/sleep infinity
     restart: unless-stopped
     volumes:
-      - ./:/code/src/github.com/Its-Alex/dhcp4-reservation
+      - ./:/code/src/github.com/Its-Alex/go-postgresql-dhcp-server
 
   postgres:
     image: postgres:9.6-alpine

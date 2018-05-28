@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/Its-Alex/dhcp4-reservation/database"
-	"github.com/Its-Alex/dhcp4-reservation/dhcp"
+	"github.com/Its-Alex/go-postgresql-dhcp-server/database"
+	"github.com/Its-Alex/go-postgresql-dhcp-server/dhcp"
 	"github.com/jmoiron/sqlx"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -17,7 +17,7 @@ const (
 
 var (
 	rootCmd = &cobra.Command{
-		Use:   "dhcp4-reservation",
+		Use:   "go-postgresql-dhcp-server",
 		Short: "DHCP4 reservation tool",
 		Long:  `Reservation tool for ipv4 plugged with postgres`,
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {

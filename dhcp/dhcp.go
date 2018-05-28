@@ -5,7 +5,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/Its-Alex/dhcp4-reservation/database"
+	"github.com/Its-Alex/go-postgresql-dhcp-server/database"
 	"github.com/krolaw/dhcp4"
 	"github.com/krolaw/dhcp4/conn"
 	"github.com/sirupsen/logrus"

@@ -24,8 +24,8 @@ $ vagrant ssh pxe_server
 $ sudo su
 # export DHCP4_INTERFACE=enp0s8
 # export DHCP4_PSQL_ADDR=10.0.2.2
-# /vagrant/bin/dhcp-server
-root@pxe-server:/home/vagrant# /vagrant/bin/dhcp-server
+# /vagrant/bin/go-postgresql-dhcp-server
+root@pxe-server:/home/vagrant# /vagrant/bin/go-postgresql-dhcp-server
 {"level":"info","msg":"dhcp4 start on interface 67 and on port enp0s8","time":"2018-05-28T13:25:09Z"}
 ```
 

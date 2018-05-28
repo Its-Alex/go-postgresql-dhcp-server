@@ -8,8 +8,8 @@ RUN apt-get update -y && \
 RUN apt-get install -y bash-completion && \
     echo ". /etc/bash_completion" >> /root/.bashrc
 
-RUN mkdir -p /code/src/github.com/Its-Alex/dhcp4-reservation
-WORKDIR /code/src/github.com/Its-Alex/dhcp4-reservation
+RUN mkdir -p /code/src/github.com/Its-Alex/go-postgresql-dhcp-server
+WORKDIR /code/src/github.com/Its-Alex/go-postgresql-dhcp-server
 ENV GOPATH=/code/
 ENV GOBIN=/code/src/github.com/Its-Alex/bin/
 
