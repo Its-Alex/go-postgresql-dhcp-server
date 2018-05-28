@@ -28,3 +28,9 @@ $ sudo su
 root@pxe-server:/home/vagrant# /vagrant/bin/dhcp-server
 {"level":"info","msg":"dhcp4 start on interface 67 and on port enp0s8","time":"2018-05-28T13:25:09Z"}
 ```
+
+In another terminal:
+
+```
+$ vagrant up blank_server
+```
