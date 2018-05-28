@@ -21,11 +21,11 @@ type Handler struct {
 
 // ServeDHCP is a state machine for dhcp response
 func (h *Handler) ServeDHCP(p dhcp4.Packet, msgType dhcp4.MessageType, options dhcp4.Options) (d dhcp4.Packet) {
-	fmt.Println("NEW MESSAGE")
 	mac := p.CHAddr().String()
 
 	switch msgType {
 	case dhcp4.Discover:
+		logrus.Infof("Discover request from: %s", mac)
 		reservation := database.GetReservationByMAC(mac)
 		if reservation.IP == "" {
 			logrus.Infof("Unknown server : %s", mac)
@@ -34,6 +34,7 @@ func (h *Handler) ServeDHCP(p dhcp4.Packet, msgType dhcp4.MessageType, options d
 		return dhcp4.ReplyPacket(p, dhcp4.Offer, h.ip, net.ParseIP(reservation.IP), h.leaseDuration,
 			h.options.SelectOrderOrAll(options[dhcp4.OptionParameterRequestList]))
 	case dhcp4.Request:
+		logrus.Infof("Request from: %s", mac)
 		if server, ok := options[dhcp4.OptionServerIdentifier]; ok && !net.IP(server).Equal(h.ip) {
 			return nil
 		}
@@ -48,6 +49,8 @@ func (h *Handler) ServeDHCP(p dhcp4.Packet, msgType dhcp4.MessageType, options d
 		}
 		return dhcp4.ReplyPacket(p, dhcp4.ACK, h.ip, net.ParseIP(reservation.IP), h.leaseDuration,
 			h.options.SelectOrderOrAll(options[dhcp4.OptionParameterRequestList]))
+	default:
+		logrus.Infof("Not handled request from: %s", mac)
 	}
 	return nil
 }
