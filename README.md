@@ -9,8 +9,17 @@ be allocated and other will be ignored.
 
 ```
 $ docker-compose up -d
+$ make db-schema db-fixtures
 $ make enter
 # make deps
 # make build
 # make test
+```
+
+## Test in Vagrant environment
+
+```
+$ vagrant up pxe_server
+$ vagrant ssh pxe_server
+$ sudo /vagrant/bin/dhcp-server --help
 ```
