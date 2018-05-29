@@ -31,13 +31,15 @@ func (h *Handler) ServeDHCP(p dhcp4.Packet, msgType dhcp4.MessageType, options d
 			logrus.Infof("Unknown server : %s", mac)
 			return nil
 		}
+		logrus.Infof("Data retrieve from database: %s", reservation)
+		h.options[dhcp4.OptionSubnetMask] = net.ParseIP(reservation.MaskSubnet)
 		return dhcp4.ReplyPacket(p, dhcp4.Offer, h.ip, net.ParseIP(reservation.IP), h.leaseDuration,
 			h.options.SelectOrderOrAll(options[dhcp4.OptionParameterRequestList]))
 	case dhcp4.Request:
 		logrus.Infof("Request from: %s", mac)
-		if server, ok := options[dhcp4.OptionServerIdentifier]; ok && !net.IP(server).Equal(h.ip) {
-			return nil
-		}
+		// if server, ok := options[dhcp4.OptionServerIdentifier]; ok && !net.IP(server).Equal(h.ip) {
+		// 	return nil
+		// }
 		reqIP := net.IP(options[dhcp4.OptionRequestedIPAddress])
 		if reqIP == nil {
 			reqIP = net.IP(p.CIAddr())
@@ -47,6 +49,8 @@ func (h *Handler) ServeDHCP(p dhcp4.Packet, msgType dhcp4.MessageType, options d
 			logrus.Infof("Unknown server : %s", mac)
 			return dhcp4.ReplyPacket(p, dhcp4.NAK, h.ip, nil, 0, nil)
 		}
+		logrus.Infof("Data retrieve from database: %s", reservation)
+		h.options[dhcp4.OptionSubnetMask] = net.ParseIP(reservation.MaskSubnet)
 		return dhcp4.ReplyPacket(p, dhcp4.ACK, h.ip, net.ParseIP(reservation.IP), h.leaseDuration,
 			h.options.SelectOrderOrAll(options[dhcp4.OptionParameterRequestList]))
 	default:

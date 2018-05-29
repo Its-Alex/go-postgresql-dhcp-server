@@ -22,3 +22,5 @@ data-dhcp4/
 .vagrant
 
 bin/
+
+*.log
