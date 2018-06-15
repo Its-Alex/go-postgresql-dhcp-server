@@ -67,6 +67,12 @@ Sometimes vagrant don't want to sync your files you can run this in terminal:
 $ vagrant rsync-auto
 ```
 
+## Source and documentation
+
+* dhcp 
+    * https://godoc.org/go.universe.tf/netboot/dhcp4
+    * https://github.com/krolaw/dhcp4
+
 ## License
 
 [AGPL](https://fr.wikipedia.org/wiki/GNU_Affero_General_Public_License)
