@@ -5,7 +5,7 @@ Vagrant.configure('2') do |config|
         pxe_server.vm.network 'private_network', ip: '192.168.0.254', virtualbox__intnet: 'pxe_network'
 
         # Setup shared folder
-        # pxe_server.vm.synced_folder '.', '/vagrant', type: 'rsync', rsync_auto: true
+        pxe_server.vm.synced_folder '.', '/vagrant', type: 'rsync', rsync_auto: true
 
         $script = <<EOF
 apt update -y
@@ -49,13 +49,11 @@ EOF
         end
     end
     config.vm.define :blank_server_ubuntu, autostart: false do |blank_server_ubuntu|
-        blank_server_ubuntu.vm.box = 'ubuntu/bionic64'
+        blank_server_ubuntu.vm.box = 'ubuntu/xenial64'
         blank_server_ubuntu.vm.synced_folder '.', '/vagrant', disabled: true
         blank_server_ubuntu.vm.network 'private_network', :adapter=>1, ip: '192.168.0.12', :mac => '1CED0C0A8853' , auto_config: false, virtualbox__intnet: 'pxe_network'
 
-        blank_server_ubuntu.ssh.username = 'root'
-        blank_server_ubuntu.ssh.password = 'password'
-        blank_server_ubuntu.ssh.dsa_authentication = false
+        blank_server_ubuntu.vm.boot_timeout = 1
 
         blank_server_ubuntu.vm.provider 'virtualbox' do |vb, override|
             vb.gui = false
