@@ -3,6 +3,7 @@ FROM golang:1.10.1-stretch as builder
 COPY database/database.go /go/src/github.com/Its-Alex/go-postgresql-dhcp-server/database/database.go
 COPY dhcp/dhcp.go /go/src/github.com/Its-Alex/go-postgresql-dhcp-server/dhcp/dhcp.go
 COPY cmd/root.go /go/src/github.com/Its-Alex/go-postgresql-dhcp-server/cmd/root.go
+COPY log/logger.go /go/src/github.com/Its-Alex/go-postgresql-dhcp-server/log/logger.go
 COPY main.go /go/src/github.com/Its-Alex/go-postgresql-dhcp-server
 COPY Gopkg.lock /go/src/github.com/Its-Alex/go-postgresql-dhcp-server
 COPY Gopkg.toml /go/src/github.com/Its-Alex/go-postgresql-dhcp-server
