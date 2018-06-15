@@ -59,9 +59,25 @@ In another terminal:
 $ vagrant destroy blank_server -f && vagrant up blank_server
 ```
 
-## Tips and bugs
+## Automation
 
-Sometimes vagrant don't want to sync your files you can run this in terminal:
+You can auutomate project if you uncomment [this line](/Vagrantfile#L8)
+
+Then run this commands
+
+* In docker 
+
+```
+$ make watch-go
+```
+
+* In vagrant 
+
+```
+$ make watch-bin
+```
+
+* In another terminal 
 
 ```
 $ vagrant rsync-auto

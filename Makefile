@@ -14,6 +14,14 @@ build:
 test:
 	go test ./...
 
+.PHONY: watch-bin
+watch-bin:
+	reflex -r "^bin/go-postgresql-dhcp-server$$" -s -- /vagrant/bin/go-postgresql-dhcp-server
+
+.PHONY: watch-go
+watch-go:
+	reflex -r "\.go$$" -s -- make build
+
 .PHONY: docker-build
 docker-build:
 	docker build . -t itsalex/go-postgresql-dhcp-server
@@ -30,8 +38,5 @@ db-fixtures:
 clean:
 	docker-compose stop | true
 	docker-compose rm -f | true
-	rm -rf ./data-dhcp4/
-	rm -rf bin/
-	rm -rf vendor/
 	vagrant destroy -f | true
-	rm .vagrant -rf
+	rm -rf ./data-dhcp4/ bin/ /vendor .vagrant

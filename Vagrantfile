@@ -10,9 +10,13 @@ Vagrant.configure('2') do |config|
         $script = <<EOF
 apt update -y
 apt upgrade -y
-apt install -y make docker.io docker-compose
+apt install -y make docker.io docker-compose golang
 
-echo 'export DHCP4_INTERFACE=enp0s8
+go get github.com/cespare/reflex
+
+echo 'export PATH=/root/go/bin:$PATH
+
+export DHCP4_INTERFACE=enp0s8
 export DHCP4_PSQL_ADDR=10.0.2.2' >> /root/.bashrc
 EOF
 
