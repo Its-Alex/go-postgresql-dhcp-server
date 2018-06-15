@@ -50,19 +50,6 @@ var (
 
 func init() {
 	viper.SetEnvPrefix("dhcp4")
-	viper.BindEnv("psql_addr")
-	viper.BindEnv("psql_port")
-	viper.BindEnv("psql_user")
-	viper.BindEnv("psql_password")
-	viper.BindEnv("psql_databse")
-	viper.BindEnv("psql_ssl")
-
-	viper.SetDefault("psql_addr", "localhost")
-	viper.SetDefault("psql_port", "5432")
-	viper.SetDefault("psql_user", "dhcp4")
-	viper.SetDefault("psql_password", "dhcp4")
-	viper.SetDefault("psql_databse", "dhcp4")
-	viper.SetDefault("psql_ssl", "disable")
 
 	rootCmd.Flags().String("interface", "", "network interface used by server")
 	rootCmd.Flags().String("port", "", "port to start server")
@@ -77,9 +64,23 @@ func init() {
 	viper.BindEnv("port")
 	viper.BindEnv("verbose")
 
+	viper.BindEnv("psql_addr")
+	viper.BindEnv("psql_port")
+	viper.BindEnv("psql_user")
+	viper.BindEnv("psql_password")
+	viper.BindEnv("psql_databse")
+	viper.BindEnv("psql_ssl")
+
 	viper.SetDefault("interface", "en0")
 	viper.SetDefault("port", "67")
 	viper.SetDefault("server_ip", "192.168.0.254")
+
+	viper.SetDefault("psql_addr", "localhost")
+	viper.SetDefault("psql_port", "5432")
+	viper.SetDefault("psql_user", "dhcp4")
+	viper.SetDefault("psql_password", "dhcp4")
+	viper.SetDefault("psql_databse", "dhcp4")
+	viper.SetDefault("psql_ssl", "disable")
 }
 
 func Execute() {

@@ -4,10 +4,16 @@ Vagrant.configure("2") do |config|
         pxe_server.vm.hostname = "pxe-server"
         pxe_server.vm.network "private_network", ip: "192.168.0.254", virtualbox__intnet: "pxe_network"
 
-$script = <<EOF
+        # Setup shared folder
+        pxe_server.vm.synced_folder ".", "/vagrant", type: "rsync"
+
+        $script = <<EOF
 apt update -y
 apt upgrade -y
 apt install -y make docker.io docker-compose
+
+echo "export DHCP4_INTERFACE=enp0s8
+export DHCP4_PSQL_ADDR=10.0.2.2" >> /root/.bashrc
 EOF
 
         pxe_server.vm.provision "shell", inline: $script

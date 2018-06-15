@@ -1,6 +1,6 @@
 .PHONY: enter
 enter:
-	docker-compose exec goworkspace bash
+	docker-compose exec goworkspace bash -c "export COLUMNS=`tput cols`; export LINES=`tput lines`; exec bash"
 
 .PHONY: deps
 deps:
