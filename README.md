@@ -9,29 +9,64 @@ be allocated with an ip and other will be ignored.
 
 ## Work in docker container
 
+### Initialisation
+
 ```
 $ docker-compose up -d
 $ make db-schema db-fixtures
 $ make enter
+```
+
+### Commands
+
+You can now use commands
+
+Get dependencies
+
+```
 # make deps
+```
+
+Build project
+
+```
 # make build
+```
+
+Run tests
+
+```
 # make test
 ```
 
 ## Test in Vagrant environment
+
+You must at least run postgres container and populate it with schema and datas
 
 ```
 $ make build
 $ vagrant up pxe_server
 $ vagrant ssh pxe_server
 $ sudo su
-# export DHCP4_INTERFACE=enp0s8
-# export DHCP4_PSQL_ADDR=10.0.2.2
 # /vagrant/bin/go-postgresql-dhcp-server
 ```
+
+Default env variable are set in vagrantfile with provisions [here](/Vagrantfile#L15)
 
 In another terminal:
 
 ```
 $ vagrant destroy blank_server -f && vagrant up blank_server
 ```
+
+## Tips and bugs
+
+Sometimes vagrant don't want to sync your files you can run this in terminal:
+
+```
+$ vagrant rsync-auto
+```
+
+## License
+
+[AGPL](https://fr.wikipedia.org/wiki/GNU_Affero_General_Public_License)
