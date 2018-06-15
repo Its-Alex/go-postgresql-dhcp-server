@@ -5,6 +5,7 @@ import (
 
 	"github.com/Its-Alex/go-postgresql-dhcp-server/database"
 	"github.com/Its-Alex/go-postgresql-dhcp-server/dhcp"
+	"github.com/Its-Alex/go-postgresql-dhcp-server/log"
 	"github.com/jmoiron/sqlx"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -21,10 +22,8 @@ var (
 		Short: "DHCP4 reservation tool",
 		Long:  `Reservation tool for ipv4 plugged with postgres`,
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
-			// Set logrus format to json
-			logrus.SetFormatter(&logrus.JSONFormatter{})
 			if viper.IsSet("verbose") {
-				logrus.SetLevel(logrus.DebugLevel)
+				log.ToggleVerbose(true)
 			}
 
 			var err error
@@ -54,7 +53,7 @@ func init() {
 	rootCmd.Flags().String("interface", "", "network interface used by server")
 	rootCmd.Flags().String("port", "", "port to start server")
 	rootCmd.Flags().String("server_ip", "", "ip of server")
-	rootCmd.Flags().StringP("verbose", "v", "", "set verbosity to debug")
+	rootCmd.Flags().BoolP("verbose", "v", false, "set verbosity to debug")
 	viper.BindPFlag("interface", rootCmd.Flags().Lookup("interface"))
 	viper.BindPFlag("server_ip", rootCmd.Flags().Lookup("server_ip"))
 	viper.BindPFlag("port", rootCmd.Flags().Lookup("port"))

@@ -51,7 +51,7 @@ $ sudo su
 # /vagrant/bin/go-postgresql-dhcp-server
 ```
 
-Default env variable are set in vagrantfile with provisions [here](/Vagrantfile#L15)
+Default env variable are set in vagrantfile with provisions [here](/Vagrantfile#L19)
 
 In another terminal:
 
@@ -61,7 +61,7 @@ $ vagrant destroy blank_server -f && vagrant up blank_server
 
 ## Automation
 
-You can auutomate project if you uncomment [this line](/Vagrantfile#L8)
+You can automate project if you uncomment [this line](/Vagrantfile#L8)
 
 Then run this commands
 

@@ -5,7 +5,7 @@ Vagrant.configure('2') do |config|
         pxe_server.vm.network 'private_network', ip: '192.168.0.254', virtualbox__intnet: 'pxe_network'
 
         # Setup shared folder
-        pxe_server.vm.synced_folder '.', '/vagrant', type: 'rsync'
+        # pxe_server.vm.synced_folder '.', '/vagrant', type: 'rsync', rsync_auto: true
 
         $script = <<EOF
 apt update -y

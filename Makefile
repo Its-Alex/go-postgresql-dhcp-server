@@ -12,11 +12,11 @@ build:
 
 .PHONY: test
 test:
-	go test ./...
+	go test -v ./...
 
 .PHONY: watch-bin
 watch-bin:
-	reflex -r "^bin/go-postgresql-dhcp-server$$" -s -- /vagrant/bin/go-postgresql-dhcp-server
+	reflex -r "^bin/go-postgresql-dhcp-server$$" -s -- /vagrant/bin/go-postgresql-dhcp-server -v
 
 .PHONY: watch-go
 watch-go:
@@ -39,4 +39,4 @@ clean:
 	docker-compose stop | true
 	docker-compose rm -f | true
 	vagrant destroy -f | true
-	rm -rf ./data-dhcp4/ bin/ /vendor .vagrant
+	rm -rf ./data-dhcp4/ bin/ vendor/ .vagrant
